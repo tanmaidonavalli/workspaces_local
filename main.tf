@@ -1,7 +1,7 @@
 provider "aws" {
   version = "~> 2.28"
-  profile = lookup(local.profile, local.environment)
-  region  = lookup(local.region, local.environment)
+  access_key = var.aws_access_key
+  secret_key = var.aws_secret_key
 }
 
 terraform {
