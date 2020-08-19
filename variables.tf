@@ -12,7 +12,7 @@ locals {
   }
   
  region = {
-  "development" = "us-east-1"
+  "aap1-dev" = "us-east-1"
 }
   }
 
