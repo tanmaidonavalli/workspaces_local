@@ -40,3 +40,7 @@ variable "aws_secret_key" {
   type = string
   description = "AWS secret key"
 }
+
+variable "env" {
+  description = "env: dev or prod"
+}
