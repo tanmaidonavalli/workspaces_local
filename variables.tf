@@ -10,7 +10,11 @@ locals {
     "staging"     = "${local.profile_prefix}-staging"
     "production"  = "${local.profile_prefix}-production"
   }
+  
+ region = {
+  "development" = "us-east-1"
 }
+  }
 
 locals {
   environment = "${terraform.workspace}"
@@ -38,6 +42,3 @@ variable "env" {
   description = "env: dev or prod"
 }
 
-variable "aws_region" {
-  default = "us-east-1"
-}
