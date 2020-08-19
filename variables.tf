@@ -10,13 +10,6 @@ locals {
     "staging"     = "${local.profile_prefix}-staging"
     "production"  = "${local.profile_prefix}-production"
   }
-  
-  region = {
-    "development" = "us-west-2"
-    "qa"          = "us-east-2"
-    "staging"     = "us-east-1"
-    "production"  = "ca-central-1"
-  }
 }
 
 locals {
@@ -43,4 +36,8 @@ variable "aws_secret_key" {
 
 variable "env" {
   description = "env: dev or prod"
+}
+
+variable "aws_region" {
+  default = "us-east-1"
 }
