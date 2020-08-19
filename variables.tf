@@ -1,11 +1,11 @@
 locals {
   app_name       = "workspaces-app"
-  profile_prefix = "tf-workspace"
+  profile_prefix = "app1"
 }
 
 locals {
   profile = {
-    "development" = "${local.profile_prefix}-development"
+    "development" = "${local.profile_prefix}-dev"
     "qa"          = "${local.profile_prefix}-qa"
     "staging"     = "${local.profile_prefix}-staging"
     "production"  = "${local.profile_prefix}-production"
