@@ -21,6 +21,33 @@
 
   - name: Install MySQL Server
     yum: name=mysql-server state=present
+    
+  - shell: grep 'temporary password' /var/log/mysqld.log | awk '{print $NF}';
+    register: result
+  -  set_fact:
+      mysql_root_pw: "{{ result.stdout }}"
+      
+  - stat: path=/root/.my.cnf
+    register: sym
+  - set_fact: mysql_root_pw="{{ masterpassword }}"
+    when: sym.stat.exists == True
+
+  - name: install .my.cnf with credentials
+    template: src=my.cnf.j2 dest=/root/.my.cnf
+              mode=0400
+    tags: my_cnf
+
+  - name: Set the root password for MySQL Database
+    command:  mysql -u root --connect-expired-password --execute="SET PASSWORD = PASSWORD('{{ masterpassword }}');"
+    
+  -  set_fact:
+      mysql_root_pw: "{{ masterpassword }}"
+
+  - name: install .my.cnf with credentials
+    template: src=my.cnf.j2 dest=/root/.my.cnf
+              mode=0400
+    tags: my_cnf
+
 
   - name: Start MySQL Server and enable it
     service: name=mysqld state=started enabled=yes
